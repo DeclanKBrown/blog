@@ -63,9 +63,9 @@ exports.sign_up = [
     }
 
     try {
-      const oldUser = User.find({ username: username })
+      const oldUser = await User.findOne({ username: username }).exec()
 
-      if (typeof oldUser !== undefined) {
+      if (oldUser !== null) {
         return res.status(400).json({ message: 'user already exists' })
       }
 
@@ -73,12 +73,14 @@ exports.sign_up = [
 
       const user = new User({
         username: username,
-        password: password,
+        password: encyptedPassword,
       })
 
       user.save()
 
-      const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '1d' })
+      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+        expiresIn: '1d',
+      })
 
       const updatedUser = user.toObject()
 
@@ -109,7 +111,9 @@ exports.log_in = asyncHandler(async (req, res, next) => {
     if (!user) {
       return res.status(status).json(info)
     }
-    const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '1d' })
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+      expiresIn: '1d',
+    })
 
     const updatedUser = user.toObject()
 
