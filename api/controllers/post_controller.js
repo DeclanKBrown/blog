@@ -1,12 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const { body, validationResult } = require('express-validator')
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
 
 const Post = require('../models/post')
-const { validate } = require('../models/user')
 
 exports.posts = asyncHandler(async (req, res, next) => {
   try {
