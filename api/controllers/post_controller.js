@@ -15,7 +15,7 @@ exports.posts = asyncHandler(async (req, res, next) => {
     return res.status(200).json({ posts: posts })
   } catch (err) {
     console.log(err)
-    res.status(500).json({ error: error })
+    res.status(500).json({ error: err })
     return next(err)
   }
 })
@@ -27,7 +27,7 @@ exports.post = asyncHandler(async (req, res, next) => {
     return res.status(200).json({ post: post })
   } catch (err) {
     console.log(err)
-    res.status(500).json({ error: error })
+    res.status(500).json({ error: err })
     return next(err)
   }
 })
@@ -60,8 +60,34 @@ exports.create_post = [
       return res.status(200).json({ message: 'Post created successfully' })
     } catch (err) {
       console.log(err)
-      res.status(500).json({ error: error })
+      res.status(500).json({ error: err })
       return next(err)
     }
   }),
 ]
+
+exports.delete_post = asyncHandler(async (req, res, next) => {
+  try {
+    await Post.findByIdAndRemove(req.params.id).exec()
+
+    return res.status(200).json({ message: 'Succesfully deleted' })
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ error: error })
+    return next(err)
+  }
+})
+
+exports.update_post = asyncHandler(async (req, res, next) => {
+  try {
+    await Post.findByIdAndUpdate(req.params.id, {
+      published: req.body.published,
+    })
+
+    return res.status(200).json({ message: 'Succesfully updated' })
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ error: err })
+    return next(err)
+  }
+})
