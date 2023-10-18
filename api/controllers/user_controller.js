@@ -12,7 +12,7 @@ passport.use(
     try {
       const user = await User.findOne({ username: username })
 
-      if (typeof user === undefined) {
+      if (user === null) {
         return done(null, false, { message: 'Incorrect username' })
       }
 
@@ -109,7 +109,8 @@ exports.log_in = asyncHandler(async (req, res, next) => {
       return next(err)
     }
     if (!user) {
-      return res.status(status).json(info)
+      console.log(status)
+      return res.status(404).json(info)
     }
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
       expiresIn: '1d',
