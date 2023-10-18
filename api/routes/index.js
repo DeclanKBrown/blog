@@ -13,11 +13,11 @@ router.post('/api/v1/log_in', user_controller.log_in)
 router.post('/api/v1/log_out', user_controller.log_out)
 
 /// POST ROUTES ///
-// router.get('/api/v1/posts', post_controller.posts)
+router.get('/api/v1/posts', post_controller.posts)
 
-// router.get('/api/v1/post/:id', post_controller.post)
+router.get('/api/v1/post/:id', post_controller.post)
 
-// router.post('/api/v1/posts', post_controller.create_post)
+router.post('/api/v1/post', post_controller.create_post)
 
 // router.delete('/api/v1/post/:id', post_controller.delete_post)
 
