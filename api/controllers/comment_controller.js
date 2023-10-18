@@ -1,5 +1,4 @@
 const asyncHandler = require('express-async-handler')
-const { body, validationResult } = require('express-validator')
 
 const Comment = require('../models/comment')
 
@@ -32,6 +31,32 @@ exports.create_comment = asyncHandler(async (req, res, next) => {
     })
 
     comment.save()
+
+    return res.status(200).json({ message: 'Success' })
+  } catch (err) {
+    console.log(err)
+    res.send(500).json({ erros: err })
+    return next(err)
+  }
+})
+
+exports.delete_comment = asyncHandler(async (req, res, next) => {
+  try {
+    await Comment.findByIdAndRemove(req.params.id)
+
+    return res.status(200).json({ message: 'Success' })
+  } catch (err) {
+    console.log(err)
+    res.send(500).json({ erros: err })
+    return next(err)
+  }
+})
+
+exports.update_comment = asyncHandler(async (req, res, next) => {
+  try {
+    await Comment.findByIdAndUpdate(req.params.id, {
+      message: req.body.message,
+    })
 
     return res.status(200).json({ message: 'Success' })
   } catch (err) {

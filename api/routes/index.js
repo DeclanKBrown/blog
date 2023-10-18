@@ -28,8 +28,8 @@ router.get('/api/v1/post/:id/comments', comment_controller.comments)
 
 router.post('/api/v1/post/:id/comments', comment_controller.create_comment)
 
-// router.delete('/api/v1/post/:id/comment/:id', comment_controller.delete_comment)
+router.delete('/api/v1/post/:id/comment/:id', comment_controller.delete_comment)
 
-// router.put('/api/v1/post/:id/comment/:id', comment_controller.update_comment)
+router.put('/api/v1/post/:id/comment/:id', comment_controller.update_comment)
 
 module.exports = router
