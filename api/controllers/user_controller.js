@@ -86,7 +86,7 @@ exports.sign_up = [
 
       delete updatedUser.password
 
-      return res.status(201).json({ token, ...updatedUser })
+      return res.status(201).json({ token, ...updatedUser, message: 'Success' })
     } catch (error) {
       console.error(error)
       res.status(500).json({ error: error })
