@@ -33,6 +33,8 @@ export default function SignUpModal({ setIsSignUpOpen }) {
         setIsSignUpOpen(false)
         const token = response.data.token
         localStorage.setItem('token', token)
+        const user = response.data.user
+        localStorage.setItem('user', user)
       } else {
         toast(response.response)
       }

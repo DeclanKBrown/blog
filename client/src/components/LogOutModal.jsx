@@ -1,40 +1,30 @@
-import { useState } from 'react'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 
-export default function LogInModal({ setIsLogInOpen }) {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-
+export default function LogOutModal({ setIsLogOutOpen }) {
   function handleCancel(e) {
     e.preventDefault()
-    setIsLogInOpen(false)
-    setUsername('')
-    setPassword('')
+    setIsLogOutOpen(false)
   }
 
   async function handleSubmit(e) {
     e.preventDefault()
 
     try {
-      const response = await axios.post('http://localhost:3000/api/v1/log_in', {
-        username: username,
-        password: password,
-      })
+      const response = await axios.post('http://localhost:3000/api/v1/log_out')
 
       console.log(response)
 
       if (response.status >= 200 && response.status <= 300) {
         toast(response.data.message)
-        setIsLogInOpen(false)
-        const token = response.data.token
-        localStorage.setItem('token', token)
-        localStorage.setItem('user', JSON.stringify(response.data.user))
+        setIsLogOutOpen(false)
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
       } else {
         toast(response.response)
       }
     } catch (error) {
-      console.error('Error Logging in', error)
+      console.error('Error Logging out', error)
       toast(error.response.data.message)
     }
   }
@@ -42,7 +32,7 @@ export default function LogInModal({ setIsLogInOpen }) {
   return (
     <div
       className="fixed inset-0 z-10 flex items-center justify-center bg-slate-600 bg-opacity-50"
-      onClick={() => setIsLogInOpen(false)}
+      onClick={() => setIsLogOutOpen(false)}
     >
       <div
         className="bg-slate-300 p-8 rounded-lg"
@@ -51,7 +41,7 @@ export default function LogInModal({ setIsLogInOpen }) {
         <form className="flex flex-col gap-2">
           <svg
             className="self-end cursor-pointer"
-            onClick={() => setIsLogInOpen(false)}
+            onClick={() => setIsLogOutOpen(false)}
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -65,24 +55,7 @@ export default function LogInModal({ setIsLogInOpen }) {
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
-          <label htmlFor="username" className="text-l select-none">
-            Username
-          </label>
-          <input
-            type="text"
-            className="py-1 pl-1 min-w-[20rem] rounded mb-5 focus:outline-none"
-            onChange={(e) => setUsername(e.target.value)}
-            value={username}
-          ></input>
-          <label htmlFor="password" className="text-l select-none">
-            Password
-          </label>
-          <input
-            type="password"
-            className="py-1 pl-1 min-w-[20rem] rounded mb-5 focus:outline-none"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-          ></input>
+          <h1 className="my-5 mb-8">Are you sure you want to log out?</h1>
           <div className="flex flex-row gap-5 justify-between px-5">
             <button
               type="cancel"

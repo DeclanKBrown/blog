@@ -120,7 +120,9 @@ exports.log_in = asyncHandler(async (req, res, next) => {
 
     delete updatedUser.password
 
-    return res.status(201).json({ token, ...updatedUser })
+    return res
+      .status(201)
+      .json({ token, user: updatedUser, message: 'Success' })
   })(req, res, next)
 })
 
