@@ -3,6 +3,7 @@ import Layout from './layouts/Layout'
 import Home from './pages/Home'
 import Post from './components/Post.jsx'
 import Dashboard from './pages/Dashboard'
+import CreatePost from './pages/CreatePost'
 import ProtectedRoutes from './Utils/ProtectedRoutes'
 
 export default function App() {
@@ -11,6 +12,7 @@ export default function App() {
       <Route element={<Layout />}>
         <Route element={<ProtectedRoutes />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/create" element={<CreatePost />} />
         </Route>
         <Route path="/" element={<Home />} />
         <Route path="/post/:id" element={<Post />} />
