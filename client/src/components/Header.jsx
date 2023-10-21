@@ -28,6 +28,14 @@ export default function Headers({
         {user ? (
           <>
             <span>Welcome Back {JSON.parse(user).username}</span>
+            {JSON.parse(user).status === 'admin' && (
+              <Link
+                className="bg-slate-300 py-1 px-2 rounded"
+                to={'/dashboard'}
+              >
+                Dashboard
+              </Link>
+            )}
             <button
               className="bg-slate-300 py-1 px-2 rounded"
               onClick={() => setIsLogOutOpen(true)}

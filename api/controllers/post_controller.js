@@ -5,7 +5,7 @@ const Post = require('../models/post')
 
 exports.posts = asyncHandler(async (req, res, next) => {
   try {
-    const posts = await Post.find().sort({ timestamp: 1 }).exec()
+    const posts = await Post.find().sort({ timestamp: -1 }).exec()
 
     return res.status(200).json({ posts: posts })
   } catch (err) {
@@ -17,7 +17,7 @@ exports.posts = asyncHandler(async (req, res, next) => {
 
 exports.post = asyncHandler(async (req, res, next) => {
   try {
-    const post = await Post.findOne({ id: req.body.id })
+    const post = await Post.findOne({ _id: req.params.id })
 
     return res.status(200).json({ post: post })
   } catch (err) {
