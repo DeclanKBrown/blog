@@ -74,8 +74,9 @@ exports.delete_post = asyncHandler(async (req, res, next) => {
 })
 
 exports.update_post = asyncHandler(async (req, res, next) => {
+  console.log(req.body)
   try {
-    await Post.findByIdAndUpdate(req.params.id, {
+    await Post.findByIdAndUpdate(req.body.id, {
       published: req.body.published,
     })
 

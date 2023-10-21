@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import Layout from './layouts/Layout'
 import Home from './pages/Home'
-import Post from './components/AdminPost'
+import Blog from './pages/Blog'
 import Dashboard from './pages/Dashboard'
 import CreatePost from './pages/CreatePost'
 import ProtectedRoutes from './Utils/ProtectedRoutes'
@@ -15,7 +15,7 @@ export default function App() {
           <Route path="/create" element={<CreatePost />} />
         </Route>
         <Route path="/" element={<Home />} />
-        <Route path="/post/:id" element={<Post />} />
+        <Route path="/post/:id" element={<Blog />} />
       </Route>
     </Routes>
   )

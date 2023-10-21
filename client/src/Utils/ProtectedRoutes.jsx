@@ -2,7 +2,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 const useAuth = () => {
   const user = JSON.parse(localStorage.getItem('user'))
-  if (user.status === 'admin') {
+  if (user && user.status === 'admin') {
     return true
   }
 }

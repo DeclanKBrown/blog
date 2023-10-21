@@ -20,7 +20,12 @@ export default function Home() {
       <h1 className="text-2xl font-semibold mb-8">Blog Posts</h1>
       {posts && posts.length > 0 ? (
         posts.map((post) => (
-          <Post key={post._id} title={post.title} timestamp={post.timestamp} />
+          <Post
+            key={post._id}
+            title={post.title}
+            timestamp={post.timestamp}
+            id={post._id}
+          />
         ))
       ) : (
         <p>No Blog Posts Yet!</p>

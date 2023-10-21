@@ -27,7 +27,6 @@ export default function Headers({
       <div className="flex flex-row gap-4 items-center">
         {user ? (
           <>
-            {console.log(user)}
             <span>Welcome Back {JSON.parse(user).username}</span>
             <button
               className="bg-slate-300 py-1 px-2 rounded"

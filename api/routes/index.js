@@ -21,7 +21,7 @@ router.post('/api/v1/post', post_controller.create_post)
 
 router.delete('/api/v1/post/:id', post_controller.delete_post)
 
-router.put('/api/v1/post/:id', post_controller.update_post)
+router.put('/api/v1/post', post_controller.update_post)
 
 /// COMMENT ROUTES ///
 router.get('/api/v1/post/:id/comments', comment_controller.comments)
