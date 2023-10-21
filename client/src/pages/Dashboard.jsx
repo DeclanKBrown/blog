@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import Post from '../components/Post'
+import Post from '../components/AdminPost'
 import { Link } from 'react-router-dom'
 
 export default function Dashboard() {
   const [posts, setPosts] = useState(null)
+  const [updated, setUpdated] = useState(false)
 
   useEffect(() => {
     async function getPosts() {
@@ -15,7 +16,7 @@ export default function Dashboard() {
     }
 
     getPosts()
-  }, [])
+  }, [updated])
 
   return (
     <main className="flex flex-col items-center my-10">
@@ -26,10 +27,12 @@ export default function Dashboard() {
       {posts &&
         posts.map((post) => (
           <Post
-            key={post.id}
+            key={post._id}
             title={post.title}
             timestamp={post.timestamp}
             published={post.published}
+            id={post._id}
+            setUpdated={setUpdated}
           />
         ))}
     </main>

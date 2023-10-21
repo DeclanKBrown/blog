@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import Layout from './layouts/Layout'
 import Home from './pages/Home'
-import Post from './components/Post.jsx'
+import Post from './components/AdminPost'
 import Dashboard from './pages/Dashboard'
 import CreatePost from './pages/CreatePost'
 import ProtectedRoutes from './Utils/ProtectedRoutes'
