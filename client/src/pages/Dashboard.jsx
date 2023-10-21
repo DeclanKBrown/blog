@@ -9,13 +9,13 @@ export default function Dashboard() {
   useEffect(() => {
     async function getPosts() {
       const allPosts = await axios.get('http://localhost:3000/api/v1/posts')
-      if (allPosts.length > 0) {
-        setPosts(allPosts)
+      if (allPosts.data.posts.length > 0) {
+        setPosts(allPosts.data.posts)
       }
     }
 
     getPosts()
-  })
+  }, [])
 
   return (
     <main className="flex flex-col items-center my-10">

@@ -1,11 +1,30 @@
+import axios from 'axios'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 export default function CreatePost() {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
+  const navigate = useNavigate()
 
   async function handleSubmit(e) {
     e.preventDefault()
+
+    try {
+      const response = await axios.post('http://localhost:3000/api/v1/post', {
+        title: title,
+        text: text,
+      })
+
+      if (response.status >= 200 && response.status <= 300) {
+        navigate('/dashboard', { replace: true })
+        toast('Success')
+      }
+    } catch (err) {
+      console.error('Error creating post', err)
+      toast(err.response.data.message)
+    }
   }
   return (
     <main className="flex flex-col items-center my-10">
