@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { DateTime } from 'luxon'
 
+import Comments from '../components/Comments'
+
 export default function Blog() {
   const [post, setPost] = useState(null)
   const postId = useParams()
@@ -17,16 +19,19 @@ export default function Blog() {
     getPost()
   }, [postId])
   return (
-    <main className="flex flex-col items-center my-10">
-      {post && (
-        <>
-          <h1 className="text-xl">{post.title}</h1>
-          <p>{post.text}</p>
-          <div className="flex items-start">
-            {DateTime.fromISO(post.timestamp).toFormat('dd-MM-yyyy')}
-          </div>
-        </>
-      )}
-    </main>
+    <>
+      <main className="flex flex-col items-center my-10">
+        {post && (
+          <>
+            <h1 className="text-xl">{post.title}</h1>
+            <p>{post.text}</p>
+            <div className="flex items-start">
+              {DateTime.fromISO(post.timestamp).toFormat('dd-MM-yyyy')}
+            </div>
+          </>
+        )}
+      </main>
+      <Comments />
+    </>
   )
 }
